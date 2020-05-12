@@ -470,24 +470,27 @@ def play_game(word_list):
     # variable total_score
     total_score = 0
     prev_hand = {}
+    bool_replay_hand = False
     # Ask user number of hands
     num_hands = int(input("Enter total number of hands: "))
     # while count < number of hands
     for hand_loop in range(num_hands):
-# =============================================================================
-#       # added replay hand feature
-#         # ask user if want to replay the hand except it's first hand
-#         if hand_loop != 0: 
-#             want_replay = input("Would you like to replay the hand? ")
-#             if want_replay.lower() == "yes":
-#                 hand = prev_hand
-#             else:
-#                 hand = deal_hand(HAND_SIZE)
-# =============================================================================
-        # deal hands -> hand(dict)
+      # added replay hand feature
+        # ask user if want to replay the hand except it's first hand
+        if hand_loop != 0:
+            want_replay = input("Would you like to replay the hand? ")
+            if want_replay.lower() == "yes":
+                bool_replay_hand = True
+            else:
+                bool_replay_hand = False
+                
         print("Start playing this hand")
-        hand = deal_hand(HAND_SIZE)
+        if bool_replay_hand:
+            hand = prev_hand
+        else:
+            hand = deal_hand(HAND_SIZE)
         display_hand(hand)
+        
         # ask for a substitution
         want_substitute = input("Would you like to substitute a letter? ")
         # if string.lower() is YES
